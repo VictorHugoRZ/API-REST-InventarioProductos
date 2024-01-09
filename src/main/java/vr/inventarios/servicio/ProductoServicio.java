@@ -17,12 +17,14 @@ public class ProductoServicio implements IProductoServicio{
     private IProductoRepositorio productoRepositorio;
 
     @Override
-    public List<Producto> listarProductos() {
+    public List<Producto> listarProductos() { //Read
+        //Retornamos todos los objetos de tipo Producto de la base de datos, esto lo especificamos con el
+        //tipo de dato que retorna la funcion List<Producto>
         return this.productoRepositorio.findAll();
     }
 
     @Override
-    public Producto buscarProductoPorId(Integer idProducto) {
+    public Producto buscarProductoPorId(Integer idProducto) { //Read
         //Tenemos que especificar con el metodo orElse(); que el valor puede ser null ya que el metodo
         //findById(); nos retorna un objeto de manera opcional, tenemos que manejar esa "excepcion" con
         //el metodo orElse();
@@ -30,12 +32,14 @@ public class ProductoServicio implements IProductoServicio{
     }
 
     @Override
-    public void guardarProducto(Producto producto) {
-        this.productoRepositorio.save(producto);
+    public Producto guardarProducto(Producto producto) {
+        //Guardamos (Create) o Actualizamos registros (Update)
+        return this.productoRepositorio.save(producto);
     }
 
     @Override
     public void eliminarProductoPorId(Integer idProducto) {
+        //Borramos registros (Delete)
         this.productoRepositorio.deleteById(idProducto);
     }
 }
